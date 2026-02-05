@@ -102,7 +102,7 @@
 ### 3.2 스토리 모드 요청 (Story Mode Payload)
 시나리오 대사(Dialogue)는 맥락과 흐름이 중요하므로, 씬(Scene) 단위로 그룹화하여 요청한다.
 
-```
+```json
 {
   "request_type": "story_batch",
   "system_instruction": "Translate the dialogue considering the scene context, character personas, and emotions.",
