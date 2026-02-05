@@ -94,28 +94,6 @@
             "cat": "Weapon_Name"
           }
         }
-      },
-      {
-        "id": "SEQ_003",
-        "category": "Dialogue",
-        // [New] 스토리 모드 컨텍스트 데이터 추가
-        "context": {
-            "scene_description": "치열한 전투 중",
-            "speaker_persona": "열혈 소년",
-            "emotion": "Confidence (자신감)",
-            "action": "주먹을 꽉 쥐며"
-        },
-        "source_text": "받아라! 이것이 나의 화염구다!",
-        "tag_text": "받아라! 이것이 나의 {SKILL_01}다!",
-        
-        // [Micro-Glossary] 이 문장에 필요한 SKILL_01 정보만 포함
-        "micro_glossary": {
-          "{SKILL_01}": {
-            "src": "화염구",
-            "tgt": "Fireball",
-            "cat": "Skill_Name"
-          }
-        }
       }
     ]
   }
