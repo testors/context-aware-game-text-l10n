@@ -99,6 +99,74 @@
   }
 }
 ```
+### 3.2 스토리 모드 요청 (Story Mode Payload)
+시나리오 대사(Dialogue)는 맥락과 흐름이 중요하므로, 씬(Scene) 단위로 그룹화하여 요청한다.
+
+```
+{
+  "request_type": "story_batch",
+  "system_instruction": "Translate the dialogue considering the scene context, character personas, and emotions.",
+  "source_lang": "ko",
+  "target_lang": "en",
+
+  // 1. 씬(Scene) 메타 데이터
+  "scene_info": {
+    "scene_name": "Chapter1_Boss_Intro",
+    "situation": "불타는 왕성 내부. 용사 알렉스가 마왕과 처음으로 대면했다. 동료들은 이미 쓰러져 있는 절망적인 상황.",
+    "characters": [
+      {
+        "name": "Alex",
+        "personality": "정의롭지만 다혈질적인 열혈 주인공",
+        "current_mood": "동료가 다쳐서 극도로 분노함"
+      },
+      {
+        "name": "Demon King",
+        "personality": "냉소적이고 인간을 벌레처럼 여기는 절대악",
+        "current_mood": "주인공의 발악이 가소로움"
+      }
+    ]
+  },
+
+  // 2. 대사(Dialogue) 배열
+  "dialogues": [
+    {
+      "id": "DIA_101",
+      "speaker": "Alex",
+      "tone": "격앙된 목소리",
+      "mood": "Furious (격노)",
+      "expression": "이를 악물며 노려봄",
+      
+      "source_text": "네 놈을... 절대 용서하지 않겠다!",
+      "tag_text": "네 놈을... 절대 용서하지 않겠다!",
+      "micro_glossary": {}
+    },
+    {
+      "id": "DIA_102",
+      "speaker": "Demon King",
+      "tone": "비웃는 듯한 차가운 목소리",
+      "mood": "Amused (즐거움)",
+      "expression": "여유로운 미소로 내려다봄",
+      
+      "source_text": "호오, 벌레치고는 제법 짖는구나.",
+      "tag_text": "호오, 벌레치고는 제법 짖는구나.",
+      "micro_glossary": {}
+    },
+    {
+      "id": "DIA_103",
+      "speaker": "Alex",
+      "tone": "기합을 넣으며",
+      "mood": "Determination (결의)",
+      "expression": "검을 고쳐 쥔다",
+      
+      "source_text": "받아라! 이것이 나의 화염구다!",
+      "tag_text": "받아라! 이것이 나의 {SKILL_01}다!",
+      "micro_glossary": {
+          "{SKILL_01}": { "src": "화염구", "tgt": "Fireball", "cat": "Skill" }
+      }
+    }
+  ]
+}
+```
 
 ---
 
