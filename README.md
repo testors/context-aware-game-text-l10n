@@ -51,50 +51,65 @@
 
 ```json
 {
-  "system_instruction": "Translate the 'items' array based on the provided 'global_glossary'. The glossary is generated in real-time specifically for this batch. Strictly follow the target terms in the glossary.",
+  "system_instruction": "Translate each object in the 'items' array. IMPORTANT: You must strictly adhere to the 'micro_glossary' defined WITHIN EACH ITEM. Do not apply glossary terms from one item to another.",
   
   "request_payload": {
     "source_lang": "ko",
     "target_lang": "en",
     
-    // [System Generated] 배치 내 모든 문장에서 추출한 태그의 합집합 (중복 제거됨)
-    "global_glossary": {
-      "{NPC_05}": {
-        "src": "전사 알렉스",
-        "tgt": "Warrior Alex",
-        "cat": "Character_Name" 
-      },
-      "{ITEM_99}": {
-        "src": "파멸의 검",
-        "tgt": "Blade of Ruin",
-        "cat": "Weapon_Name"
-      },
-      "{SKILL_01}": {
-        "src": "화염구",
-        "tgt": "Fireball",
-        "cat": "Skill_Name"
-      }
-    },
+    // [Change] Global Glossary 제거됨.
+    // 각 문장은 독립적인 컨텍스트를 가지며 서로 간섭하지 않음.
 
-    // [Batch Items] 한 번의 API 호출로 처리할 문장 목록
     "items": [
       {
         "id": "SEQ_001",
         "category": "Quest_Description",
         "source_text": "전사 알렉스가 잃어버린 파멸의 검을 찾고 있다.", 
-        "tag_text": "{NPC_05}가 잃어버린 {ITEM_99}를 찾고 있다."
+        "tag_text": "{NPC_05}가 잃어버린 {ITEM_99}를 찾고 있다.",
+        
+        // [Micro-Glossary] 이 문장에 사용된 태그(NPC_05, ITEM_99) 정보만 포함
+        "micro_glossary": {
+          "{NPC_05}": {
+            "src": "전사 알렉스",
+            "tgt": "Warrior Alex",
+            "cat": "Character_Name"
+          },
+          "{ITEM_99}": {
+            "src": "파멸의 검",
+            "tgt": "Blade of Ruin",
+            "cat": "Weapon_Name"
+          }
+        }
       },
       {
         "id": "SEQ_002",
         "category": "System_Message",
         "source_text": "파멸의 검을 장착했습니다.",
-        "tag_text": "{ITEM_99}을 장착했습니다." // 위 문장과 동일한 ITEM_99 태그 재사용
+        "tag_text": "{ITEM_99}을 장착했습니다.",
+        
+        // [Micro-Glossary] 위와 동일한 ITEM_99지만, 독립성을 위해 중복 포함됨
+        "micro_glossary": {
+          "{ITEM_99}": {
+            "src": "파멸의 검",
+            "tgt": "Blade of Ruin",
+            "cat": "Weapon_Name"
+          }
+        }
       },
       {
         "id": "SEQ_003",
         "category": "Dialogue",
         "source_text": "받아라! 이것이 나의 화염구다!",
-        "tag_text": "받아라! 이것이 나의 {SKILL_01}다!"
+        "tag_text": "받아라! 이것이 나의 {SKILL_01}다!",
+        
+        // [Micro-Glossary] 이 문장에 필요한 SKILL_01 정보만 포함
+        "micro_glossary": {
+          "{SKILL_01}": {
+            "src": "화염구",
+            "tgt": "Fireball",
+            "cat": "Skill_Name"
+          }
+        }
       }
     ]
   }
