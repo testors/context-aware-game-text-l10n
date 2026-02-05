@@ -1,6 +1,6 @@
-# 프로젝트 명세서: Context-Aware Recursive AI Translation System (v3.1)
+# 맥락 기반 게임 텍스트 번역
 
-## 1. 배경 및 핵심 혁신 (Background & Innovation)
+## 1. 컨셉 아이디어
 
 ### 1.1 배경: 기존 입력 방식의 한계 (AS-IS)
 현재의 게임 텍스트 입력 방식은 **'단순 텍스트(Plain Text)'** 입력에 의존하고 있다.
